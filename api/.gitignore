@@ -8,6 +8,4 @@ build/
 # Sistema operativo / editor
 .vscode/
 
-node_modules/*
-
-
+node_modules/
