@@ -7,7 +7,7 @@ export const getDiaId = async () => {
         WHERE fecha = CURRENT_DATE`
     );
 
-    return result.rows[0].id;
+    return result.rows;
 }
 
 export const getRetoDaily = async (diaId: number) => {
@@ -16,8 +16,8 @@ export const getRetoDaily = async (diaId: number) => {
             r.id,
             a.name,
             d.fecha,
-            t.tipo,
-            CASE t.tipo
+            t.nombre,
+            CASE t.nombre
                 WHEN 'emoji' THEN json_build_object('emoji', re.emojis)
                 WHEN 'opening' THEN json_build_object('opening_url', ro.opening_url)
                 WHEN 'personaje' THEN json_build_object('personaje', rp.img_url)
@@ -33,10 +33,10 @@ export const getRetoDaily = async (diaId: number) => {
             LEFT JOIN retos_openings ro ON r.id = ro.id
             LEFT JOIN retos_personajes rp ON r.id = rp.id
             LEFT JOIN retos_imagenes ri ON r.id = ri.id
-            JOIN tipos t ON r.tipoid = t.id
-            JOIN animes a ON r.animeid = a.id
-            JOIN dias d ON r.diaid = d.id
-        WHERE r.diaid = $1;
+            JOIN tipos t ON r.tipo_id = t.id
+            JOIN animes a ON r.anime_id = a.id
+            JOIN dias d ON r.dia_id = d.id
+        WHERE r.dia_id = $1;
         `,
         [diaId]
     );
@@ -44,7 +44,6 @@ export const getRetoDaily = async (diaId: number) => {
     return result.rows;
 }
 
-//new Date().toISOString().split('T')[0], limit
 export const getDiaIdsByDate = async (limit: number) => {
     const result = await pool.query(
         `SELECT id
@@ -58,24 +57,47 @@ export const getDiaIdsByDate = async (limit: number) => {
     return result.rows;
 }
 
-export const getRetosByIds = async (dayIds: string) => {
+export const getRetosByIds = async (dayIds: Array<number>) => {
     const result = await pool.query(
-        `SELECT id, fecha
+        `SELECT r.id, d.fecha
             FROM retos r
-            INNER JOIN dias d on r.diaid = d.id
-        WHERE d.fecha IN($1)`,
+            INNER JOIN dias d on r.dia_id = d.id
+        WHERE d.id = ANY($1)`,
         [dayIds]
     );
 
     return result.rows;
 }
 
-export const getRetoByDay = async (day: number) => {
+export const getRetoByDay = async (date: string) => {
     const result = await pool.query(
-        `SELECT *
-            FROM retos
-        WHERE diaid = $1`,
-        [day]
+        `SELECT
+            r.id,
+            a.name,
+            d.fecha,
+            t.nombre,
+            CASE t.nombre
+                WHEN 'emoji' THEN json_build_object('emoji', re.emojis)
+                WHEN 'opening' THEN json_build_object('opening_url', ro.opening_url)
+                WHEN 'personaje' THEN json_build_object('personaje', rp.img_url)
+                WHEN 'imagenes' THEN json_build_object(
+                'very_easy', ri.very_easy_url,
+                'easy', ri.easy_url,
+                'medium', ri.medium_url,
+                'hard', ri.hard_url
+                )
+            END AS datos
+            FROM retos r
+            LEFT JOIN retos_emojis re ON r.id = re.id
+            LEFT JOIN retos_openings ro ON r.id = ro.id
+            LEFT JOIN retos_personajes rp ON r.id = rp.id
+            LEFT JOIN retos_imagenes ri ON r.id = ri.id
+            JOIN tipos t ON r.tipo_id = t.id
+            JOIN animes a ON r.anime_id = a.id
+            JOIN dias d ON r.dia_id = d.id
+        WHERE d.fecha = $1;
+        `,
+        [date]
     );
 
     return result.rows;
