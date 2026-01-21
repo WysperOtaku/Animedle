@@ -1,63 +1,80 @@
-import { Pool } from 'pg';
+import { pool } from "./dbconnection";
 
-export const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
-});
-
-const getRetoDaily = async () => {
-    const diaId = await pool.query(
-        `SELECT 'id'
-            FROM 'tabla de dia'
-        WHERE 'fecha' == $1`,
-        [new Date().toISOString().split('T')[0]]
+export const getDiaId = async () => {
+    const result = await pool.query(
+        `SELECT id
+            FROM dias
+        WHERE fecha = CURRENT_DATE`
     );
 
+    return result.rows[0].id;
+}
+
+export const getRetoDaily = async (diaId: number) => {
     const result = await pool.query(
-        `SELECT *
-            FROM 'tabla de retos'
-        WHERE 'dia id' == $1`,
+        `SELECT
+            r.id,
+            a.name,
+            d.fecha,
+            t.tipo,
+            CASE t.tipo
+                WHEN 'emoji' THEN json_build_object('emoji', re.emojis)
+                WHEN 'opening' THEN json_build_object('opening_url', ro.opening_url)
+                WHEN 'personaje' THEN json_build_object('personaje', rp.img_url)
+                WHEN 'imagenes' THEN json_build_object(
+                'very_easy', ri.very_easy_url,
+                'easy', ri.easy_url,
+                'medium', ri.medium_url,
+                'hard', ri.hard_url
+                )
+            END AS datos
+            FROM retos r
+            LEFT JOIN retos_emojis re ON r.id = re.id
+            LEFT JOIN retos_openings ro ON r.id = ro.id
+            LEFT JOIN retos_personajes rp ON r.id = rp.id
+            LEFT JOIN retos_imagenes ri ON r.id = ri.id
+            JOIN tipos t ON r.tipoid = t.id
+            JOIN animes a ON r.animeid = a.id
+            JOIN dias d ON r.diaid = d.id
+        WHERE r.diaid = $1;
+        `,
         [diaId]
     );
 
     return result.rows;
 }
 
-const getRetosByLimit = async (limit: number) => {
-    /**
-     * Mirar la fecha de hoy y tirar X retos atras
-     * Tener un array de los dayId de los retos
-     * Hacer una consulta a los retos con un IN para cojer los retos que estan en esos dayId
-     * Los datos recojidos de la base de datos seran: fecha, retoId
-     */
-    const dayIds = await pool.query(
-        `SELECT 'dayId'
-            FROM 'tabla de dia'
-        WHERE 'fecha' <= $1
-        ORDER BY fecha DESC
-        LIMIT $2`,
-        [new Date().toISOString().split('T')[0], limit]
-    );
-
-    const dayIdsStr = "";
-    //Transformar el dato dayIds a un string con formato asi '1,2,3,4,5'
-
+//new Date().toISOString().split('T')[0], limit
+export const getDiaIdsByDate = async (limit: number) => {
     const result = await pool.query(
-        `SELECT 'fecha', 'retoId'
-            FROM 'tabla de retos' r
-            INNER JOIN 'tabla de dia' d on r.id = d.id
-        WHERE d.fecha IN($1)`,
-        [dayIdsStr]
+        `SELECT id
+            FROM dias
+        WHERE fecha <= CURRENT_DATE
+        ORDER BY fecha DESC
+        LIMIT $1`,
+        [limit]
     );
 
     return result.rows;
 }
 
-const getRetoByDay = async (day: number) => {
+export const getRetosByIds = async (dayIds: string) => {
+    const result = await pool.query(
+        `SELECT id, fecha
+            FROM retos r
+            INNER JOIN dias d on r.diaid = d.id
+        WHERE d.fecha IN($1)`,
+        [dayIds]
+    );
+
+    return result.rows;
+}
+
+export const getRetoByDay = async (day: number) => {
     const result = await pool.query(
         `SELECT *
-            FROM 'tabla de retos'
-        WHERE 'dia id' == $1`,
+            FROM retos
+        WHERE diaid = $1`,
         [day]
     );
 
