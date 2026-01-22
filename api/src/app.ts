@@ -1,9 +1,9 @@
 import express from 'express';
 import helmet from 'helmet';
 import cors from 'cors';
-import testRouter from './routes/testRouter';
 import limiter from './middleware/rateLimiter';
 import logger from './middleware/pinoLogger';
+import challengeRouter from './routes/challenge.routes';
 
 const app = express();
 
@@ -19,6 +19,6 @@ app.use(helmet());
 
 app.use(logger);
 
-app.use(testRouter);
+app.use('/api/v0', challengeRouter);
 
 export default app;
