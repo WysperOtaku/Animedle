@@ -9,3 +9,5 @@ build/
 .vscode/
 
 node_modules/
+
+logs/
