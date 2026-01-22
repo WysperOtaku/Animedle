@@ -1,13 +1,15 @@
 import PinoHttp from 'pino-http';
 import pino from 'pino';
+import { mkdir } from 'fs';
 
 const transport = pino.transport({
   targets: [
     {
       target: 'pino-pretty',
       options: {
-        destination: './../logs/exceotions.log',
-        level: 'warn'
+        destination: './../logs/exceptions.log',
+        level: 'warn',
+        mkdir: true
       }
     },
     {
