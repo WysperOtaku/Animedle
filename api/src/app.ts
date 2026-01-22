@@ -1,11 +1,11 @@
 import express from 'express';
 import morgan from 'morgan';
-import testRouter from './routes/testRouter';
+import challengeRouter from './routes/challenge.routes';
 
 const app = express();
 
 app.use(morgan('dev'));
 
-app.use(testRouter);
+app.use("/api/v0", challengeRouter);
 
 export default app;
