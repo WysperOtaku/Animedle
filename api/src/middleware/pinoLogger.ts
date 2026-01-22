@@ -1,5 +1,6 @@
 import PinoHttp from 'pino-http';
 import pino from 'pino';
+import { mkdir } from 'fs';
 
 const transport = pino.transport({
   targets: [
