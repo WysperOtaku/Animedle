@@ -4,10 +4,11 @@ import pino from 'pino';
 const transport = pino.transport({
   targets: [
     {
-      target: 'pino-pretty',
+      target: 'pino/file',
       options: {
-        destination: './../logs/exceotions.log',
-        level: 'warn'
+        destination: './logs/exceptions.log',
+        level: 'warn',
+        mkdir: true
       }
     },
     {
@@ -35,7 +36,10 @@ const logger = PinoHttp({
       method: req.method,
       url: req.url
     }),
-    res: (res) => ({ statusCode: res.statusCode })
+    res: (res) => ({ statusCode: res.statusCode }),
+    err: (err) => ({
+      message: err.message
+    })
   },
 
   customLogLevel: (_req, res, err) => {
