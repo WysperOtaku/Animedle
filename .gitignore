@@ -6,7 +6,3 @@
 !.vscode/settings.json
 
 node_modules/
-
-# logs
-
-logs/
