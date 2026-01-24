@@ -1,168 +1,68 @@
 ---
+import { Image } from 'astro:assets';
+
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ChallengeInfo from "../layouts/ChallengeInfo.astro";
+
+import anime from "../assets/anime.svg";
+import personaje from "../assets/personaje.svg";
+import emoji from "../assets/emoji.svg";
+import opening from "../assets/opening.svg";
+import github from "../assets/github.svg";
 ---
 
 <BaseLayout
   title="Animedle - Reto diario de adivinar anime"
+  cssFile='../../public/styles/index.css'
 >
-  <main>
+<main>
     <div class="hero">
-      <h1>
-        🎌 <span class="text-gradient">Animedle</span>
-      </h1>
-      <p class="subtitle">
-        Reto diario de adivinar el anime
-      </p>
+        <h1>Animedle</h1>
     </div>
 
-    <div class="cards">
-      <a href="/docs" class="card">
-        <h2>📖 Documentación API</h2>
-        <p>
-          Aprende cómo usar la API de Animedle para
-          integrarla en tus proyectos y obtener información
-          sobre animes.
-        </p>
-      </a>
+    <section class="challenge_button_main">
+        <ChallengeInfo
+            challengeName='anime'
+            image={anime}
+            destination="/anime"
+            size='70'
+            title='Anime'
+            description='Adivina con 4 fotos'
+        />
 
-      <a href="/playground" class="card">
-        <h2>🎮 Prueba el juego</h2>
-        <p>
-          Juega ahora y pon a prueba tus conocimientos de
-          anime con el reto diario.
-        </p>
-      </a>
+        <ChallengeInfo
+            challengeName='personaje'
+            image={personaje}
+            destination="/character"
+            size='70'
+            title='Personaje'
+            description='Adivina con un personaje'
+        />
 
-      <a href="/about" class="card">
-        <h2>ℹ️ Sobre el proyecto</h2>
-        <p>
-          Conoce más sobre Animedle, cómo fue creado y qué
-          tecnologías utiliza.
-        </p>
-      </a>
+        <ChallengeInfo
+            challengeName='emoji'
+            image={emoji}
+            destination="/emoji"
+            size='70'
+            title='Emojis'
+            description='Adivina con 5 emojis'
+        />
+
+        <ChallengeInfo
+            challengeName='opening'
+            image={opening}
+            destination="/opening"
+            size='70'
+            title='Opening'
+            description='Adivina con 5 segundos de opening'
+        />
+    </section>
+
+    <div class="api_info">
+        <a class="api_github_href" href="https://github.com/WysperOtaku/Animedle">
+            <Image class="api_github" src={github} alt="Github Repository" />
+        </a>
+        <a class="api_h3" href="/how-it-works">API Docs</a>
     </div>
-  </main>
+</main>
 </BaseLayout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 2rem 1rem;
-    width: 100%;
-    max-width: 82rem;
-  }
-
-  .hero {
-    text-align: center;
-    padding: 6rem 1rem 4rem;
-    margin-bottom: 3rem;
-    background: linear-gradient(
-      180deg,
-      rgba(var(--sl-color-accent), 0.05) 0%,
-      transparent 100%
-    );
-    border-radius: 1rem;
-  }
-
-  h1 {
-    font-size: clamp(2.5rem, 7vw, 4.5rem);
-    font-weight: 800;
-    line-height: 1.1;
-    margin-bottom: 0.5em;
-    letter-spacing: -0.02em;
-    color: rgb(var(--sl-color-white));
-  }
-
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    display: inline-block;
-  }
-
-  .subtitle {
-    font-size: clamp(1.125rem, 3vw, 1.5rem);
-    color: rgb(var(--sl-color-gray-2));
-    font-weight: 400;
-    max-width: 40rem;
-    margin: 0 auto;
-  }
-
-  .cards {
-    display: grid;
-    grid-template-columns: repeat(
-      auto-fit,
-      minmax(300px, 1fr)
-    );
-    gap: 1.5rem;
-    padding: 0;
-  }
-
-  .card {
-    padding: 1.75rem;
-    background: rgb(var(--sl-color-gray-6));
-    border: 1px solid rgb(var(--sl-color-gray-5));
-    border-radius: 0.75rem;
-    transition: all 0.2s ease;
-    text-decoration: none;
-    color: rgb(var(--sl-color-gray-1));
-    display: block;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--accent-gradient);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
-
-  .card:hover {
-    background: rgb(var(--sl-color-gray-5));
-    border-color: rgb(var(--sl-color-accent));
-    transform: translateY(-2px);
-    box-shadow:
-      0 8px 24px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(var(--sl-color-accent), 0.2);
-  }
-
-  .card:hover::before {
-    opacity: 1;
-  }
-
-  .card h2 {
-    margin: 0 0 0.75rem 0;
-    font-size: 1.375rem;
-    font-weight: 600;
-    color: rgb(var(--sl-color-white));
-    transition: color 0.2s ease;
-  }
-
-  .card p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.65;
-    color: rgb(var(--sl-color-gray-2));
-  }
-
-  .card:hover h2 {
-    color: rgb(var(--sl-color-accent-high));
-  }
-
-  @media (max-width: 768px) {
-    .hero {
-      padding: 4rem 1rem 3rem;
-    }
-
-    .cards {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
