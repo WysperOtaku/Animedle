@@ -1,0 +1,43 @@
+---
+import ChallengeButton from "./ChallengeButton.astro";
+
+import anime from "../assets/anime.svg";
+import personaje from "../assets/personaje.svg";
+import emoji from "../assets/emoji.svg";
+import opening from "../assets/opening.svg";
+---
+
+<div class="challenge_button_container">
+    <ChallengeButton
+        challengeName='anime'
+        image={anime}
+        destination="/anime"
+    />
+    <ChallengeButton
+        challengeName='personaje'
+        image={personaje}
+        destination="/character"
+    />
+    <ChallengeButton
+        challengeName='emoji'
+        image={emoji}
+        destination="/emoji"
+    />
+    <ChallengeButton
+        challengeName='opening'
+        image={opening}
+        destination="/opening"
+    />
+</div>
+
+<style is:global>
+    .challenge_button_container {
+        position: relative;
+        margin: 0 auto;
+        width: fit-content;
+        display: flex;
+        flex-direction: row;
+        gap: 25px;
+        padding: 20px;
+    }
+</style>

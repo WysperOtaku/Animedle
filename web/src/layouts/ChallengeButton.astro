@@ -1,0 +1,28 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    challengeName: string;
+	image: ImageMetadata;
+	destination: string;
+    size?: string;
+}
+
+const { challengeName, image, destination, size = 50 } = Astro.props;
+---
+
+<a
+    href=`${destination}`
+    style={`--size: ${size}px;`}>
+    <Image class="btn_redirect" src={image} alt=`Challenge de ${challengeName}` />
+</a>
+
+<style is:global>
+    .btn_redirect {
+        aspect-ratio: 1 / 1;
+        width: var(--size);
+        height: var(--size);
+        border-radius: 100%;
+        border: 2px solid white;
+    }
+</style>
