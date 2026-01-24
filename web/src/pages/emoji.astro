@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ChallengeButtonContainer from '../layouts/ChallengeButtonContainer.astro';
+
+import github from "../assets/github.svg";
+---
+
+<BaseLayout
+  title="Animedle - Reto diario de adivinar anime"
+  cssFile='../../public/styles/global.css'
+>
+<main>
+    <div class="hero">
+        <h1>Animedle</h1>
+    </div>
+
+    <ChallengeButtonContainer />
+
+    <div class="clues">
+        
+    </div>
+
+    <input class="guess_input" type="text" placeholder="Introduce anime...">
+
+    <button class="guess_button">Make a guess</button>
+</main>
+
+<div class="api_info">
+    <a class="api_github_href" href="https://github.com/WysperOtaku/Animedle">
+        <Image class="api_github" src={github} alt="Github Repository" />
+    </a>
+    <a class="api_h3" href="/how-it-works">API Docs</a>
+</div>
+</BaseLayout>
