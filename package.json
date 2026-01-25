@@ -1,0 +1,32 @@
+{
+  "name": "animedle",
+  "version": "1.0.0",
+  "description": "[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint . --ext .ts,.tsx,.astro"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WysperOtaku/Animedle.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WysperOtaku/Animedle/issues"
+  },
+  "homepage": "https://github.com/WysperOtaku/Animedle#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "eslint": "^9.39.2",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-astro": "^1.5.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-unused-imports": "^4.3.0",
+    "globals": "^17.0.0",
+    "typescript-eslint": "^8.53.0"
+  }
+}

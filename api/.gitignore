@@ -1,0 +1,16 @@
+# Archivos compilados de TypeScript
+dist/
+build/
+
+# Variables de entorno (muy importante)
+.env
+
+# Sistema operativo / editor
+.vscode/
+
+node_modules/
+
+logs/
+
+# Archivos estáticos - se suben manualmente a Railway Volume
+public/uploads/
