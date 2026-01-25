@@ -1,0 +1,56 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+    challengeName: string;
+	image: ImageMetadata;
+	destination: string;
+    size?: string;
+    title: string;
+    description: string;
+}
+
+const { challengeName, image, destination, size = "50", title, description } = Astro.props;
+---
+
+<a class="challenge_button" href=`${destination}` style=`--size: ${size}px;`>
+    <Image class="btn_redirect" src={image} alt=`Challenge de ${challengeName}` />
+    <div class="challenge_info">
+        <h3 class="challenge_h3">{title}</h3>
+        <p class="challenge_p">{description}</p>
+    </div>
+</a>
+
+<style is:global>
+    .challenge_button {
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        margin: 10px;
+        text-decoration: none;
+        color: inherit;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.3);
+    }
+
+    .challenge_button:hover {
+        box-shadow: 0 0 2px 3px rgba(255, 255, 255, 0.3);
+    }
+
+    .btn_redirect {
+        aspect-ratio: 1 / 1;
+        width: var(--size);
+        height: var(--size);
+        border-radius: 100%;
+        border: 2px solid white;
+    }
+
+    .challenge_info {
+        margin: 0px 20px;
+    }
+
+    .challenge_h3 {
+        font-size: 1.4rem;
+    }
+</style>

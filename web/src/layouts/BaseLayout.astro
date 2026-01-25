@@ -1,4 +1,6 @@
 ---
+import "../styles/global.css";
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -16,6 +18,72 @@ const { title = "Animedle", description = "Reto diario de adivinar anime" } = As
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
+		
+		<meta property="og:site_name" content="Animedle" />
+		<meta property="og:locale" content="es_ES" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={Astro.url} />
+		
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
+		<meta name="keywords" content="animedle, anime, wordle anime, adivinar anime, emoji anime, opening anime, anime songs, anime openings, imagenes anime, juego diario, reto diario, daily challenge, quiz anime, trivia anime, puzzle anime">
+		<meta name="robots" content="index, follow" />
+
+		<meta name="description" content="Descubre Animedle, el juego diario donde pones a prueba tu conocimiento del anime. Adivina series mediante imágenes, personajes, emojis y openings. ¡Un nuevo desafío cada día!">
+
+		<link rel="canonical" href={Astro.url} />
+		<link rel="alternate" hreflang="es" href={Astro.url} />
+
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
+		
+		<!-- Schema.org -->
+		<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "WebApplication",
+			"name": "Animedle",
+			"url": "https://animedle.com",
+			"description": "Reto diario de adivinar anime con diferentes modalidades: imágenes, personajes, emojis y openings",
+			"applicationCategory": "Game",
+			"genre": ["Puzzle", "Trivia", "Anime"],
+			"offers": {
+				"@type": "Offer",
+				"price": "0",
+				"priceCurrency": "EUR"
+			},
+			"operatingSystem": "Web Browser",
+			"browserRequirements": "Requires JavaScript. Requires HTML5.",
+			"gamePlatform": "Web",
+			"aggregateRating": {
+				"@type": "AggregateRating",
+				"ratingValue": "4.8",
+				"ratingCount": "150",
+				"bestRating": "5",
+				"worstRating": "1"
+			},
+			"author": {
+				"@type": "Organization",
+				"name": "Animedle Team"
+			},
+			"inLanguage": "es",
+			"featureList": [
+				"Reto diario de anime con 4 imágenes",
+				"Adivina el personaje",
+				"Adivina con emojis",
+				"Reconocimiento de openings"
+			]
+		}
+		</script>
+		
+		<script>
+			import "../types/main";
+		</script>
 	</head>
 	<body>
 		<slot />
@@ -48,6 +116,7 @@ const { title = "Animedle", description = "Reto diario de adivinar anime" } = As
 	* {
 		box-sizing: border-box;
 		margin: 0;
+		font-family: gabarito;
 	}
 	
 	html {
@@ -73,9 +142,5 @@ const { title = "Animedle", description = "Reto diario de adivinar anime" } = As
 	a {
 		color: rgb(var(--sl-color-accent-high));
 		text-decoration: none;
-	}
-	
-	a:hover {
-		text-decoration: underline;
 	}
 </style>

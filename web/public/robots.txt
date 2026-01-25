@@ -1,0 +1,13 @@
+# Permitir todo
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://animedle.com/sitemap.xml
+
+# Permitir crawlers especificos
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
