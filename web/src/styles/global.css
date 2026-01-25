@@ -49,6 +49,7 @@ h1 {
     margin: 0 auto;
     display: flex;
     align-self: center;
+    justify-content: center;
     width: 500px;
     height: 250px;
     border: 2px solid white;
@@ -109,4 +110,8 @@ h1 {
     font-size: 1.3rem;
     color: white;
     text-decoration: underline;
+}
+
+.emoji_clue {
+    font-size: 4rem;
 }
