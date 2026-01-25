@@ -5,11 +5,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ChallengeButtonContainer from '../layouts/ChallengeButtonContainer.astro';
 
 import github from "../assets/github.svg";
+
+import "../styles/global.css";
 ---
 
 <BaseLayout
   title="Animedle - Reto diario de adivinar anime"
-  cssFile='../../public/styles/global.css'
 >
 <main>
     <div class="hero">
@@ -18,13 +19,13 @@ import github from "../assets/github.svg";
 
     <ChallengeButtonContainer />
 
-    <div class="clues">
+    <div id="clues" class="clues">
         
     </div>
 
     <input class="guess_input" type="text" placeholder="Introduce anime...">
 
-    <button class="guess_button">Make a guess</button>
+    <button id="submit_guess" class="guess_button">Make a guess</button>
 </main>
 
 <div class="api_info">
@@ -34,3 +35,48 @@ import github from "../assets/github.svg";
     <a class="api_h3" href="/how-it-works">API Docs</a>
 </div>
 </BaseLayout>
+
+<script>
+    import { getChallenge } from "../types/loadChallenges";
+
+    const clues = document.getElementById("clues");
+    const dailyInfo = await getChallenge('emoji');
+  
+    const tag = document.createElement("p");
+    const emojiData = (dailyInfo?.datos as EmojiData).emoji;
+    
+    tag.textContent = emojiData;
+    tag.classList.add("emoji_clue");
+    clues!.appendChild(tag);
+
+    const submitButton = document.getElementById("submit_guess");
+    const inputGuess = document.querySelector(".guess_input") as HTMLInputElement;
+
+    submitButton?.addEventListener("click", () => {
+        const userGuess = inputGuess.value.trim().toLowerCase();
+        const correctAnswer = dailyInfo?.name.toLowerCase();
+        
+        const normalize = (str: string) => str
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^a-z0-9]/g, "");
+        
+        const normalizedGuess = normalize(userGuess);
+        const normalizedAnswer = normalize(correctAnswer || "");
+        
+        // Crear regex flexible: permite que falten hasta 2 caracteres o estén en diferente orden
+        const pattern = normalizedAnswer.split("").join(".*?");
+        const regex = new RegExp(pattern, "i");
+        
+        // Comprobar si la respuesta es correcta (exacta o muy similar)
+        const isExactMatch = normalizedGuess === normalizedAnswer;
+        const isSimilar = regex.test(normalizedGuess) && 
+                         normalizedGuess.length >= normalizedAnswer.length * 0.7;
+        
+        if (isExactMatch || isSimilar) {
+            alert("¡Correcto! 🎉");
+        } else {
+            alert("Incorrecto, intenta de nuevo 😢");
+        }
+    });
+</script>

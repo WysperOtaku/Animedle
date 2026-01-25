@@ -9,11 +9,12 @@ import personaje from "../assets/personaje.svg";
 import emoji from "../assets/emoji.svg";
 import opening from "../assets/opening.svg";
 import github from "../assets/github.svg";
+
+import "../styles/index.css";
 ---
 
 <BaseLayout
   title="Animedle - Reto diario de adivinar anime"
-  cssFile='../../public/styles/index.css'
 >
 <main>
     <div class="hero">
@@ -58,11 +59,11 @@ import github from "../assets/github.svg";
         />
     </section>
 
-    <div class="api_info">
-        <a class="api_github_href" href="https://github.com/WysperOtaku/Animedle">
-            <Image class="api_github" src={github} alt="Github Repository" />
+    <div class="api_info_menu">
+        <a class="api_github_href_menu" href="https://github.com/WysperOtaku/Animedle">
+            <Image class="api_github_menu" src={github} alt="Github Repository" />
         </a>
-        <a class="api_h3" href="/how-it-works">API Docs</a>
+        <a class="api_h3_menu" href="/how-it-works">API Docs</a>
     </div>
 </main>
 </BaseLayout>
