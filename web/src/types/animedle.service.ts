@@ -3,7 +3,8 @@ class AnimedleApiClient {
   public dailyChallenges: ChallengeData[] | undefined;
 
   constructor(
-    baseUrl: string = 'http://localhost:3000/api/v0'
+    baseUrl: string = import.meta.env.PUBLIC_BASE_URL +
+      'api/v0'
   ) {
     this.baseUrl = baseUrl;
   }

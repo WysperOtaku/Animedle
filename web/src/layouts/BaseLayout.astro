@@ -1,146 +1,179 @@
 ---
-import "../styles/global.css";
+import '../styles/global.css';
 
 interface Props {
-	title?: string;
-	description?: string;
+  title?: string;
+  description?: string;
 }
 
-const { title = "Animedle", description = "Reto diario de adivinar anime" } = Astro.props;
+const {
+  title = 'Animedle',
+  description = 'Reto diario de adivinar anime'
+} = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-		
-		<meta property="og:site_name" content="Animedle" />
-		<meta property="og:locale" content="es_ES" />
-		<meta property="og:type" content="website" />
-		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
-		<meta property="og:url" content={Astro.url} />
-		
-		<meta name="twitter:card" content="summary_large_image" />
-		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
 
-		<meta name="keywords" content="animedle, anime, wordle anime, adivinar anime, emoji anime, opening anime, anime songs, anime openings, imagenes anime, juego diario, reto diario, daily challenge, quiz anime, trivia anime, puzzle anime">
-		<meta name="robots" content="index, follow" />
+    <meta property="og:site_name" content="Animedle" />
+    <meta property="og:locale" content="es_ES" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url} />
 
-		<meta name="description" content="Descubre Animedle, el juego diario donde pones a prueba tu conocimiento del anime. Adivina series mediante imágenes, personajes, emojis y openings. ¡Un nuevo desafío cada día!">
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+    <meta name="twitter:title" content={title} />
+    <meta
+      name="twitter:description"
+      content={description}
+    />
 
-		<link rel="canonical" href={Astro.url} />
-		<link rel="alternate" hreflang="es" href={Astro.url} />
+    <meta
+      name="keywords"
+      content="animedle, anime, wordle anime, adivinar anime, juego adivina el anime, adivina el anime por pistas, juego diario de adivinar anime, reto diario de adivinar el anime, juego tipo wordle de anime, juego de anime online gratis, trivia anime diaria, juego de preguntas de anime, emoji anime, opening anime, anime songs, anime openings, imagenes anime, juego diario, reto diario, daily challenge, quiz anime, trivia anime, puzzle anime, API pública de anime, API REST de anime, API para juegos de anime, anime daily challenge API, API gratuita para practicar programación, API de retos diarios, API JSON anime ejemplos, documentación API REST node.js, ejemplo API node con supabase, Node.js API ejemplo, Express REST API ejemplo, Astro Starlight documentación, Supabase PostgreSQL ejemplo, API REST para proyectos frontend, practicar TypeScript con APIs"
+    />
+    <meta name="robots" content="index, follow" />
 
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap" rel="stylesheet">
-		
-		<!-- Schema.org -->
-		<script type="application/ld+json">
-		{
-			"@context": "https://schema.org",
-			"@type": "WebApplication",
-			"name": "Animedle",
-			"url": "https://animedle.com",
-			"description": "Reto diario de adivinar anime con diferentes modalidades: imágenes, personajes, emojis y openings",
-			"applicationCategory": "Game",
-			"genre": ["Puzzle", "Trivia", "Anime"],
-			"offers": {
-				"@type": "Offer",
-				"price": "0",
-				"priceCurrency": "EUR"
-			},
-			"operatingSystem": "Web Browser",
-			"browserRequirements": "Requires JavaScript. Requires HTML5.",
-			"gamePlatform": "Web",
-			"aggregateRating": {
-				"@type": "AggregateRating",
-				"ratingValue": "4.8",
-				"ratingCount": "150",
-				"bestRating": "5",
-				"worstRating": "1"
-			},
-			"author": {
-				"@type": "Organization",
-				"name": "Animedle Team"
-			},
-			"inLanguage": "es",
-			"featureList": [
-				"Reto diario de anime con 4 imágenes",
-				"Adivina el personaje",
-				"Adivina con emojis",
-				"Reconocimiento de openings"
-			]
-		}
-		</script>
-		
-		<script>
-			import "../types/main";
-		</script>
-	</head>
-	<body>
-		<slot />
-	</body>
+    <meta
+      name="description"
+      content="Descubre Animedle, el juego diario donde pones a prueba tu conocimiento del anime. Adivina series mediante imágenes, personajes, emojis y openings. ¡Un nuevo desafío cada día!"
+    />
+
+    <link rel="canonical" href={Astro.url} />
+    <link rel="alternate" hreflang="es" href={Astro.url} />
+
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com/"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Animedle",
+        "url": "https://animedle.com",
+        "description": "Reto diario de adivinar anime con diferentes modalidades: imágenes, personajes, emojis y openings",
+        "applicationCategory": "Game",
+        "genre": ["Puzzle", "Trivia", "Anime"],
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR"
+        },
+        "operatingSystem": "Web Browser",
+        "browserRequirements": "Requires JavaScript. Requires HTML5.",
+        "gamePlatform": "Web",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "ratingCount": "150",
+          "bestRating": "5",
+          "worstRating": "1"
+        },
+        "author": {
+          "@type": "Organization",
+          "name": "Animedle Team"
+        },
+        "inLanguage": "es",
+        "featureList": [
+          "Reto diario de anime con 4 imágenes",
+          "Adivina el personaje",
+          "Adivina con emojis",
+          "Reconocimiento de openings"
+        ]
+      }
+    </script>
+
+    <script>
+      import '../types/main';
+    </script>
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
 
 <style is:global>
-	:root {
-		--sl-color-accent: 124, 58, 237;
-		--sl-color-accent-high: 138, 92, 246;
-		--sl-color-accent-low: 109, 40, 217;
-		--sl-color-white: 255, 255, 255;
-		--sl-color-gray-1: 238, 241, 248;
-		--sl-color-gray-2: 198, 203, 221;
-		--sl-color-gray-3: 149, 157, 185;
-		--sl-color-gray-4: 99, 108, 137;
-		--sl-color-gray-5: 61, 68, 93;
-		--sl-color-gray-6: 36, 40, 57;
-		--sl-color-black: 23, 25, 35;
-		--sl-color-bg: var(--sl-color-black);
-		
-		--accent-gradient: linear-gradient(
-			135deg,
-			rgb(var(--sl-color-accent-low)),
-			rgb(var(--sl-color-accent)) 50%,
-			rgb(var(--sl-color-accent-high))
-		);
-	}
-	
-	* {
-		box-sizing: border-box;
-		margin: 0;
-		font-family: gabarito;
-	}
-	
-	html {
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-		background: rgb(var(--sl-color-bg));
-		color: rgb(var(--sl-color-gray-1));
-		line-height: 1.6;
-	}
-	
-	body {
-		margin: 0;
-		min-height: 100vh;
-	}
-	
-	code {
-		font-family: 'Courier New', Courier, monospace;
-		background: rgb(var(--sl-color-gray-6));
-		padding: 0.125rem 0.375rem;
-		border-radius: 0.25rem;
-		font-size: 0.9em;
-	}
-	
-	a {
-		color: rgb(var(--sl-color-accent-high));
-		text-decoration: none;
-	}
+  :root {
+    --sl-color-accent: 124, 58, 237;
+    --sl-color-accent-high: 138, 92, 246;
+    --sl-color-accent-low: 109, 40, 217;
+    --sl-color-white: 255, 255, 255;
+    --sl-color-gray-1: 238, 241, 248;
+    --sl-color-gray-2: 198, 203, 221;
+    --sl-color-gray-3: 149, 157, 185;
+    --sl-color-gray-4: 99, 108, 137;
+    --sl-color-gray-5: 61, 68, 93;
+    --sl-color-gray-6: 36, 40, 57;
+    --sl-color-black: 23, 25, 35;
+    --sl-color-bg: var(--sl-color-black);
+
+    --accent-gradient: linear-gradient(
+      135deg,
+      rgb(var(--sl-color-accent-low)),
+      rgb(var(--sl-color-accent)) 50%,
+      rgb(var(--sl-color-accent-high))
+    );
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    font-family: gabarito;
+  }
+
+  html {
+    font-family:
+      -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+      'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    background: rgb(var(--sl-color-bg));
+    color: rgb(var(--sl-color-gray-1));
+    line-height: 1.6;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  code {
+    font-family: 'Courier New', Courier, monospace;
+    background: rgb(var(--sl-color-gray-6));
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+  }
+
+  a {
+    color: rgb(var(--sl-color-accent-high));
+    text-decoration: none;
+  }
 </style>
