@@ -14,21 +14,30 @@ app.disable('x-powered-by');
 
 app.use(express.json());
 
-app.use(cors({ origin: '*', optionsSuccessStatus: 200, credentials: true }));
+app.use(
+  cors({
+    origin: '*',
+    optionsSuccessStatus: 200,
+    credentials: true
+  })
+);
 
 app.use(limiter);
 
-app.use(helmet({
-  crossOriginResourcePolicy: { policy: "cross-origin" },
-  crossOriginEmbedderPolicy: false
-}));
+app.use(
+  helmet({
+    crossOriginResourcePolicy: { policy: 'cross-origin' },
+    crossOriginEmbedderPolicy: false
+  })
+);
 
 app.use(logger);
 
-app.use(
-  '/uploads',
-  express.static(path.join(__dirname, '../public/uploads'))
-);
+const uploadsPath = process.env.NODE_ENV === 'production'
+  ? '/app/api/public/uploads'
+  : path.join(__dirname, '../public/uploads');
+
+app.use('/uploads', express.static(uploadsPath));
 
 app.use('/uploads', fileNotFound);
 
