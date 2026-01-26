@@ -14,11 +14,14 @@ app.disable('x-powered-by');
 
 app.use(express.json());
 
-app.use(cors({ origin: '*', optionsSuccessStatus: 200 }));
+app.use(cors({ origin: '*', optionsSuccessStatus: 200, credentials: true }));
 
 app.use(limiter);
 
-app.use(helmet());
+app.use(helmet({
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  crossOriginEmbedderPolicy: false
+}));
 
 app.use(logger);
 
