@@ -45,9 +45,11 @@ import "../styles/global.css";
   
     const tag = document.createElement("img");
     const atributes = `${apiUrl}/${(dailyInfo?.datos as PersonajeData).personaje}`;
+    let blur = 10;
 
     tag.setAttribute("src", atributes);
     tag.setAttribute("alt", "Pista para personaje");
+    tag.style.filter = `blur(${blur}px)`;
     clues!.appendChild(tag);
 
     const submitButton = document.getElementById("submit_guess");
@@ -78,6 +80,10 @@ import "../styles/global.css";
             alert("¡Correcto! 🎉");
         } else {
             alert("Incorrecto, intenta de nuevo 😢");
+            if (blur > 0){
+                blur = blur - 2;
+                tag.style.filter = `blur(${blur}px)`;
+            }
         }
     });
 </script>
